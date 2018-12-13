@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ubergeek3141@gmail.com"]
 
   spec.summary       = %q{Dynamic content and workflow engine}
-  spec.homepage      = "https://github.com/riddler_engine/riddler"
+  spec.homepage      = "https://github.com/riddler/riddler"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -32,6 +32,9 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.add_dependency "ksuid"
+  spec.add_dependency "liquid"
 
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "guard"
