@@ -2,6 +2,9 @@ require "riddler/version"
 
 require "liquid"
 
+require "riddler/drops/hash_drop"
+
+require "riddler/context_builder"
 require "riddler/context"
 
 require "riddler/element"
