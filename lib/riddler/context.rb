@@ -7,7 +7,7 @@ module Riddler
       input ||= {}
       @variables = {}
       input.each do |key, value|
-        assign key, value
+        assign key, drop_for(value)
       end
     end
 
@@ -18,6 +18,12 @@ module Riddler
     def render string
       template = ::Liquid::Template.parse string
       template.render variables
+    end
+
+    private
+
+    def drop_for data
+      ::Riddler::Drops::HashDrop.new data
     end
   end
 

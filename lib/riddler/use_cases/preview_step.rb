@@ -2,12 +2,21 @@ module Riddler
   module UseCases
 
     class PreviewStep
-      attr_reader :definition, :context, :step
+      attr_reader :definition, :params, :headers, :step
 
-      def initialize definition, context = ::Riddler::Context.new
+      def initialize definition, params: {}, headers: {}
         @definition = definition
-        @context = context
+        @params = params
+        @headers = headers
         @step = ::Riddler::Step.for definition, context
+      end
+
+      def context
+        @context ||= begin
+          builder = ::Riddler::ContextBuilder.new params: params,
+            headers: headers
+          builder.build
+        end
       end
 
       def process
