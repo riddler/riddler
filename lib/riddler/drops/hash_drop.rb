@@ -11,6 +11,12 @@ module Riddler
       def liquid_method_missing method
         @hash[method]
       end
+
+      def method_missing method, *_args
+        method = method.to_s
+        return super unless hash.key? method
+        liquid_method_missing method
+      end
     end
 
   end

@@ -13,9 +13,9 @@ module Riddler
 
       def context
         @context ||= begin
-          builder = ::Riddler::ContextBuilder.new params: params,
+          director = ::Riddler::ContextDirector.new params: params,
             headers: headers
-          builder.build
+          director.context
         end
       end
 
