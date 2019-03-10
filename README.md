@@ -69,10 +69,18 @@ require "riddler"
 require "net/http"
 
 class PokemonContextBuilder < ::Riddler::ContextBuilder
-  def process
-    return unless context.params.pokemon_id
+  # Does the current context have the data available for this builder to function
+  def data_available?
+    context.params.pokemon_id
+  end
 
-    pokemon_id = context.params.pokemon_id
+  # Extract IDs from the context (params, headers, JWTs, etc) and store
+  # them in context.ids
+  def extract_ids
+    add_id :pokemon_id, context.params.pokemon_id
+  end
+
+  def process
     uri = URI "https://pokeapi.co/api/v2/pokemon/#{pokemon_id}/"
     response_string = Net::HTTP.get uri
     response = JSON.parse response_string
