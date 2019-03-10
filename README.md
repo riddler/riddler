@@ -4,24 +4,12 @@ Riddler is a dynamic content and workflow engine.
 
 ## Usage
 
-### Basic Example
+### Basic Example (using Liquid)
 
-Given the following Content Definition (created by the admin tool):
-
-#### content_definition.yml
-```yaml
----
-id: el_text
-name: text
-content_type: element
-type: text
-text: "Hello {{ params.name }}!"
-```
-
-We can render that content and supply a context (used in the Liquid template)
+Riddler combines a ContentDefinition with a Context to render the output (using
+Liquid - https://shopify.github.io/liquid/)
 
 ```ruby
-require "yaml"
 require "riddler"
 
 content_definition = {
@@ -41,11 +29,38 @@ Riddler.render content_definition, params: {name: "World"}
 # {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello World!"}
 ```
 
+### Predicate Example (using Predicator)
+
+Pieces of content can define if they should be included or not. Here we use the
+`include_predicate` to specify that it should only be included if `params.name = 'foo'`.
+
+```ruby
+require "riddler"
+
+content_definition = {
+  "id"=>"el_text",
+  "name"=>"text",
+  "content_type"=>"element",
+  "type"=>"text",
+  "text"=>"Hello {{ params.name }}!",
+  "include_predicate" => "params.name = 'foo'"
+}
+
+Riddler.render content_definition
+
+# nil
+
+Riddler.render content_definition, params: {name: "foo"}
+
+# {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello foo!"}
+```
+
 
 ### PokeAPI ContextBuilder example
+
 One way Riddler can be extended is by adding new ContextBuilders. Let's add the ability to look up a Pokemon at https://pokeapi.co/
 
-We will then pass in a pokemon_id as a param
+We will then pass in a `pokemon_id` as a param
 
 This also shows Liquid filters - capitalizing the name
 
