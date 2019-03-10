@@ -4,7 +4,7 @@ module Riddler
     attr_accessor :context_builders
 
     def initialize
-      @context_builders = [::Riddler::ContextBuilders::UserAgent]
+      @context_builders = []
     end
   end
 

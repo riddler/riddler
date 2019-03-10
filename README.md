@@ -2,6 +2,36 @@
 
 Riddler is a dynamic content and workflow engine.
 
+## Usage
+
+Given the following Content Definition (created by the admin tool):
+
+#### content_definition.yml
+```yaml
+---
+id: el_text
+name: text
+content_type: element
+type: text
+text: "Hello {{ params.name }}!"
+```
+
+We can render that content and supply a context (used in the Liquid template)
+
+```ruby
+require "yaml"
+require "riddler"
+
+content_definition = YAML.safe_load File.read "content_definition.yml"
+# {"id"=>"el_text", "name"=>"text", "content_type"=>"element", "type"=>"text", "text"=>"Hello {{ params.name }}!"}
+
+Riddler.render content_definition
+# {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello !"}
+
+Riddler.render content_definition, {params: {name: 'World'}}
+# {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello World!"}
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -18,9 +48,6 @@ Or install it yourself as:
 
     $ gem install riddler
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
@@ -30,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/riddler. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/riddler/riddler. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -38,4 +65,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Riddler project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/riddler/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Riddler project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/riddler/riddler/blob/master/CODE_OF_CONDUCT.md).

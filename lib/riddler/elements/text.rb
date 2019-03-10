@@ -1,9 +1,8 @@
 module Riddler
   module Elements
-
-    class Heading < ::Riddler::Element
+    class Text < ::Riddler::Element
       def self.type
-        "heading"
+        "text"
       end
 
       def text
