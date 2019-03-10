@@ -1,14 +1,22 @@
 module Riddler
-
   class Element
+    include ::Riddler::Includeable
+
     attr_reader :definition, :context
 
+    def self.subclasses
+      @@subclasses ||= []
+    end
+
+    def self.inherited subclass
+      self.subclasses << subclass
+    end
+
     def self.for definition, context
-      # This should be "type" not "object"
-      element_type = definition["object"]
+      element_type = definition["type"]
 
       # Maybe this should be a registry
-      klass = subclasses.detect { |klass| klass.type == element_type }
+      klass = subclasses.detect { |k| k.type == element_type }
 
       klass.new definition, context
     end
@@ -18,20 +26,13 @@ module Riddler
       @context = context
     end
 
-    #def id
-    #  definition["id"]
-    #end
-
-    #def type
-    #  self.class.type
-    #end
-
     def to_hash
       {
+        content_type: "element",
         type: self.class.type,
-        id: definition["id"]
+        id: definition["id"],
+        name: definition["name"]
       }
     end
   end
-
 end

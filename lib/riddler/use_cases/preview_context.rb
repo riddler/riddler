@@ -1,13 +1,11 @@
 module Riddler
   module UseCases
-    class PreviewStep
-      attr_reader :definition, :params, :headers, :step
+    class PreviewContext
+      attr_reader :params, :headers
 
-      def initialize definition, params: {}, headers: {}
-        @definition = definition
+      def initialize params: {}, headers: {}
         @params = params
         @headers = headers
-        @step = ::Riddler::Step.for definition, context
       end
 
       def context
@@ -15,7 +13,7 @@ module Riddler
       end
 
       def process
-        step.to_hash
+        context.to_hash
       end
 
       private
