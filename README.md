@@ -4,6 +4,8 @@ Riddler is a dynamic content and workflow engine.
 
 ## Usage
 
+### Basic Example
+
 Given the following Content Definition (created by the admin tool):
 
 #### content_definition.yml
@@ -22,14 +24,61 @@ We can render that content and supply a context (used in the Liquid template)
 require "yaml"
 require "riddler"
 
-content_definition = YAML.safe_load File.read "content_definition.yml"
-# {"id"=>"el_text", "name"=>"text", "content_type"=>"element", "type"=>"text", "text"=>"Hello {{ params.name }}!"}
+content_definition = {
+  "id"=>"el_text",
+  "name"=>"text",
+  "content_type"=>"element",
+  "type"=>"text",
+  "text"=>"Hello {{ params.name }}!"
+}
 
 Riddler.render content_definition
+
 # {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello !"}
 
-Riddler.render content_definition, {params: {name: 'World'}}
+Riddler.render content_definition, params: {name: "World"}
+
 # {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello World!"}
+```
+
+
+### PokeAPI ContextBuilder example
+One way Riddler can be extended is by adding new ContextBuilders. Let's add the ability to look up a Pokemon at https://pokeapi.co/
+
+We will then pass in a pokemon_id as a param
+
+This also shows Liquid filters - capitalizing the name
+
+```ruby
+require "riddler"
+require "net/http"
+
+class PokemonContextBuilder < ::Riddler::ContextBuilder
+  def process
+    return unless context.params.pokemon_id
+
+    pokemon_id = context.params.pokemon_id
+    uri = URI "https://pokeapi.co/api/v2/pokemon/#{pokemon_id}/"
+    response_string = Net::HTTP.get uri
+    response = JSON.parse response_string
+
+    context.assign "pokemon", response
+  end
+end
+
+Riddler.configure { |c| c.context_builders << PokemonContextBuilder }
+
+content_definition = {
+  "id"=>"el_text",
+  "name"=>"text",
+  "content_type"=>"element",
+  "type"=>"text",
+  "text"=>"Hello {{ pokemon.name | capitalize }}!"
+}
+
+Riddler.render content_definition, params: {pokemon_id: "1"}
+
+# {:content_type=>"element", :type=>"text", :id=>"el_text", :name=>"text", :text=>"Hello Bulbasaur!"}
 ```
 
 ## Installation
@@ -37,7 +86,7 @@ Riddler.render content_definition, {params: {name: 'World'}}
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'riddler'
+gem "riddler"
 ```
 
 And then execute:

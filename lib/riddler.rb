@@ -48,8 +48,11 @@ module Riddler
     @logger ||= ::Outlog.logger
   end
 
-  def self.render content_definition, context = {}
-    context = ::Riddler::Context.new context unless context.kind_of? ::Riddler::Context
+  def self.render content_definition, params: {}, headers: {}, context: nil
+    if context.nil?
+      director = ::Riddler::ContextDirector.new params: params, headers: headers
+      context = director.context
+    end
 
     case content_definition["content_type"]
     when "element"
