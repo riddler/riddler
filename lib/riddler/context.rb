@@ -9,6 +9,7 @@ module Riddler
         "ids" => {}
       }
       input.each do |key, value|
+        next if value.nil?
         assign key, value
       end
     end

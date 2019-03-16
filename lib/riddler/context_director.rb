@@ -3,9 +3,10 @@ module Riddler
   class ContextDirector
     attr_reader :params, :headers
 
-    def initialize params: {}, headers: {}
-      @params = params
-      @headers = headers
+    def initialize options={}
+      options = {} if options.nil?
+      @params = options[:params] || options["params"]
+      @headers = options[:headers] || options["headers"]
       @ctx = ::Riddler::Context.new params: params, headers: headers
       @ids_extracted = false
       @builders_applied = false
