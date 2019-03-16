@@ -48,9 +48,9 @@ module Riddler
     @logger ||= ::Outlog.logger
   end
 
-  def self.render content_definition, params: {}, headers: {}, context: nil
-    if context.nil?
-      director = ::Riddler::ContextDirector.new params: params, headers: headers
+  def self.render content_definition, context={}
+    unless context.kind_of? ::Riddler::Context
+      director = ::Riddler::ContextDirector.new context
       context = director.context
     end
 
