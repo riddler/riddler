@@ -57,7 +57,7 @@ module ::Riddler
           end
         <% tests.each do |test| %>
           def test_<%= test["name"] %>
-            expected_result = <%= test["result"] %>
+            expected_result = <% if test["result"].nil? %>nil<% else %><%= test["result"] %><% end %>
             context = <% if test["context"].nil? %>nil<% else %><%= test["context"] %><% end %>
 
             result = ::Riddler.render definition, context

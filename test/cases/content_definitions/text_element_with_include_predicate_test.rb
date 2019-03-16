@@ -8,7 +8,7 @@ class TextElementWithIncludePredicateTest < ::Minitest::Test
   end
 
   def test_with_no_context
-    expected_result = 
+    expected_result = nil
     context = nil
 
     result = ::Riddler.render definition, context
