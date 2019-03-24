@@ -31,10 +31,6 @@ module Riddler
       return if @ids_extracted
 
       builders.each do |builder|
-        unless builder.data_available?
-          ::Riddler.logger.debug "data not available for builder", context_builder: builder.class.name
-          next
-        end
         ::Riddler.logger.debug "extracting ids", context_builder: builder.class.name
         builder.extract_ids
       end
@@ -46,10 +42,6 @@ module Riddler
       return if @builders_applied
 
       builders.each do |builder|
-        unless builder.data_available?
-          ::Riddler.logger.debug "data not available for builder", context_builder: builder.class.name
-          next
-        end
         ::Riddler.logger.debug "processing context builder", context_builder: builder.class.name
         builder.process
       end
@@ -59,8 +51,14 @@ module Riddler
 
     def builders
       @builders ||= ::Riddler.configuration.context_builders.map do |builder_class|
-        builder_class.new @ctx
-      end
+        builder = builder_class.new @ctx
+        if !builder.data_available?
+          ::Riddler.logger.debug "data not available for builder", context_builder: builder.class.name
+          nil
+        else
+          builder
+        end
+      end.compact
     end
   end
 
