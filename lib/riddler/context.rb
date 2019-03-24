@@ -1,5 +1,4 @@
 module Riddler
-
   class Context
     attr_reader :variables
 
@@ -53,10 +52,11 @@ module Riddler
       case data
       when ::Liquid::Drop
         data
-      else
+      when ::Hash
         ::Riddler::Drops::HashDrop.new data
+      else
+        data
       end
     end
   end
-
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    riddler (0.1.0)
+    riddler (0.2.0)
       faraday
       faraday_middleware
       grpc
@@ -69,7 +69,7 @@ GEM
     kwalify (0.7.2)
     launchy (2.4.3)
       addressable (~> 2.3)
-    liquid (4.0.2)
+    liquid (4.0.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -77,6 +77,8 @@ GEM
     lumberjack (1.0.13)
     method_source (0.8.2)
     minitest (5.11.3)
+    minitest-focus (1.1.2)
+      minitest (>= 4, < 6)
     multipart-post (2.0.0)
     nenv (0.3.0)
     notiffany (0.1.1)
@@ -146,6 +148,7 @@ DEPENDENCIES
   guard
   hashdiff
   minitest (~> 5.0)
+  minitest-focus
   pry-nav
   rake (~> 10.0)
   riddler!
