@@ -8,6 +8,7 @@ require "simplecov"
 
 require "hashdiff"
 require "minitest/autorun"
+require "minitest/focus"
 require "minitest/pride"
 require "pry-nav"
 require "riddler"

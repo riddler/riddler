@@ -6,16 +6,7 @@ module Riddler
       end
 
       def href
-        @href ||= context.render definition["href"]
-      end
-
-      def link
-        return href if context.variable(:interaction).nil?
-        "/interactions/%s/redirect?element_id=%s&url=%s" % [
-          context.interaction.id,
-          definition["id"],
-          href
-        ]
+        context.render definition["href"]
       end
 
       def text
@@ -23,7 +14,7 @@ module Riddler
       end
 
       def to_hash
-        super.merge text: text, href: href, link: link
+        super.merge text: text, href: href
       end
     end
   end
