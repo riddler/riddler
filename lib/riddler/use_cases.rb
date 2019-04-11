@@ -1,3 +1,4 @@
+require "riddler/use_cases/admin_preview_email"
 require "riddler/use_cases/admin_preview_step"
 require "riddler/use_cases/complete_interaction"
 require "riddler/use_cases/dismiss_interaction"

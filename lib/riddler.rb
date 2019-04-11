@@ -33,6 +33,13 @@ require "riddler/steps/variant"
 
 require "riddler/use_cases"
 
+# Emails
+require "inky"
+require "premailer"
+require "riddler/email"
+require "riddler/emails/basic"
+require "riddler/emails/variant"
+
 module Riddler
   class Error < StandardError; end
 
@@ -59,6 +66,8 @@ module Riddler
     case content_definition["content_type"]
     when "element"
       content = ::Riddler::Element.for content_definition, context
+    when "email"
+      content = ::Riddler::Email.for content_definition, context
     when "step"
       content = ::Riddler::Step.for content_definition, context
     end
