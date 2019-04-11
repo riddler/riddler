@@ -36,7 +36,7 @@ module Riddler
 
     def to_hash
       hash_array = variables.map do |key, value|
-        [key, value.to_hash]
+        [key, hash_value(value)]
       end
       Hash[hash_array]
     end
@@ -57,6 +57,11 @@ module Riddler
       else
         data
       end
+    end
+
+    def hash_value value
+      return value.to_hash if value.respond_to? :to_hash
+      value
     end
   end
 end

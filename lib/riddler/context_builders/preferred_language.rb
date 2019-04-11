@@ -5,7 +5,7 @@ module Riddler
       ACCEPT_LANGAUGE_HEADER = "accept_language"
 
       def data_available?
-        context.headers&.key? ACCEPT_LANGAUGE_HEADER
+        (context.headers || {})[ACCEPT_LANGAUGE_HEADER]
       end
 
       def process
@@ -17,7 +17,7 @@ module Riddler
 
       def sorted_accept_languages
         language_header = context.headers[ACCEPT_LANGAUGE_HEADER]
-        languages = language_header.scan(LANGUAGE_REGEXP).map do |lang, q|
+        languages = language_header.to_s.scan(LANGUAGE_REGEXP).map do |lang, q|
           [lang, (q || '1').to_f]
         end
         languages.sort_by(&:last).reverse.map(&:first)

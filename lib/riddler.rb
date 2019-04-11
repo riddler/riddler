@@ -14,6 +14,7 @@ require "riddler/drops/hash_drop"
 require "riddler/configuration"
 
 require "riddler/context_builder"
+require "riddler/context_builders/cookies"
 require "riddler/context_builders/faraday_builder"
 require "riddler/context_builders/preferred_language"
 require "riddler/context_director"
