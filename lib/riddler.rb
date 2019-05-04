@@ -26,6 +26,9 @@ require "riddler/elements/link"
 require "riddler/elements/text"
 require "riddler/elements/variant"
 
+require "riddler/guide"
+require "riddler/messaging"
+
 require "riddler/step"
 require "riddler/steps/content"
 require "riddler/steps/variant"
