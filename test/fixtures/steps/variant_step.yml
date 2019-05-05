@@ -1,0 +1,27 @@
+id: st_variant
+name: variant
+content_type: step
+type: variant
+steps:
+- id: st_foo
+  name: foo
+  content_type: step
+  type: content
+  include_predicate: params.name = 'foo'
+  include_predicate_instructions: [["load", "params.name"], ["to_str"], ["lit", "foo"], ["compare", "EQ"]]
+  elements:
+  - id: el_text
+    name: text
+    content_type: element
+    type: text
+    text: "Hello {{ params.name }}!"
+- id: st_default
+  name: default
+  content_type: step
+  type: content
+  elements:
+  - id: el_text
+    name: text
+    content_type: element
+    type: text
+    text: "Hello {{ params.name }}!"

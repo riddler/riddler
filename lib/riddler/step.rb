@@ -1,8 +1,11 @@
 module Riddler
-  class Step
-    include ::Riddler::Includeable
+  class Step < ::Riddler::Content
+    CONTENT_TYPE = "step".freeze
 
-    attr_reader :definition, :context, :preview_enabled
+    include ::Riddler::Concerns::Includeable
+    include ::Riddler::Concerns::Logging
+
+    attr_reader :definition, :context
 
     def self.subclasses
       @@subclasses ||= []
@@ -20,14 +23,27 @@ module Riddler
       klass.new definition, context
     end
 
-    def initialize definition, context
-      @definition = definition
-      @context = context
-    end
+    #def initialize definition, context
+    #  @definition = definition
+    #  @context = context
+    #end
+
+    #def id
+    #  definition["id"]
+    #end
+
+    #def journey
+    #  @journey = context["journey"]
+    #end
+
+    #def enter
+    #  debug "enter", content_type: CONTENT_TYPE, id: id, journey_id: journey.id
+    #  ::Riddler::Messaging.producer.publish "enter", {id: id, journey_id: journey.id}
+    #end
 
     def to_hash
       {
-        content_type: "step",
+        content_type: CONTENT_TYPE,
         type: self.class.type,
         id: definition["id"],
         name: definition["name"]

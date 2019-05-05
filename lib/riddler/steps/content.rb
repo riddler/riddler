@@ -1,9 +1,8 @@
 module Riddler
   module Steps
     class Content < ::Riddler::Step
-      def self.type
-        "content"
-      end
+      TYPE = "content".freeze
+      def self.type; TYPE; end
 
       def elements
         @elements ||= definition["elements"]

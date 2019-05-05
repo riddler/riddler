@@ -1,6 +1,6 @@
 module Riddler
   class Element
-    include ::Riddler::Includeable
+    include ::Riddler::Concerns::Includeable
 
     attr_reader :definition, :context
 

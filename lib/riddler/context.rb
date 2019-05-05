@@ -20,6 +20,7 @@ module Riddler
     def variable name
       variables[name.to_s]
     end
+    alias_method :[], :variable
 
     def render string
       template = ::Liquid::Template.parse string

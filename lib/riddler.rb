@@ -7,11 +7,16 @@ require "outlog"
 require "predicator"
 require "ulid"
 
-require "riddler/includeable"
+require "riddler/concerns"
 
 require "riddler/drops/hash_drop"
+require "riddler/drops/journey_drop"
+
+require "riddler/action"
 
 require "riddler/configuration"
+
+require "riddler/content"
 
 require "riddler/context_builder"
 require "riddler/context_builders/faraday_builder"
@@ -27,6 +32,7 @@ require "riddler/elements/text"
 require "riddler/elements/variant"
 
 require "riddler/guide"
+require "riddler/journey"
 require "riddler/messaging"
 
 require "riddler/step"
@@ -34,6 +40,8 @@ require "riddler/steps/content"
 require "riddler/steps/variant"
 
 require "riddler/use_cases"
+
+require "riddler/visitor"
 
 module Riddler
   class Error < StandardError; end
