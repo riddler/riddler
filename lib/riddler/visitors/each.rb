@@ -10,8 +10,8 @@ module Riddler
       private
 
       def visit node
-        super
         block.call node
+        super
       end
     end
   end

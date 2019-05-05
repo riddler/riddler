@@ -23,28 +23,10 @@ module Riddler
       klass.new definition, context
     end
 
-    #def initialize definition, context
-    #  @definition = definition
-    #  @context = context
-    #end
-
-    #def id
-    #  definition["id"]
-    #end
-
-    #def journey
-    #  @journey = context["journey"]
-    #end
-
-    #def enter
-    #  debug "enter", content_type: CONTENT_TYPE, id: id, journey_id: journey.id
-    #  ::Riddler::Messaging.producer.publish "enter", {id: id, journey_id: journey.id}
-    #end
-
     def to_hash
       {
-        content_type: CONTENT_TYPE,
-        type: self.class.type,
+        content_type: content_type,
+        type: type,
         id: definition["id"],
         name: definition["name"]
       }

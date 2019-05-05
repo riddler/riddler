@@ -60,6 +60,11 @@ module Riddler
     @logger ||= ::Outlog.logger
   end
 
+  def self.content_for content_definition, context={}
+    guide = ::Riddler::Guide.new content_definition, context
+    guide.content
+  end
+
   def self.render content_definition, context={}
     unless context.kind_of? ::Riddler::Context
       director = ::Riddler::ContextDirector.new context
