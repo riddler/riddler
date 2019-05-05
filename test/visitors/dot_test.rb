@@ -3,10 +3,12 @@ require "test_helper"
 module Riddler
   module Visitors
     class TestDot < Minitest::Test
+      include ::Riddler::FixtureHelpers
+
       def test_basic_step
-        path = File.expand_path "../fixtures/steps/content_step.yml", __dir__
-        definition = YAML.load File.read path
-        assert_dot definition, "[label=\"content\"]"
+        step_definition = load_step "content_step"
+        step = ::Riddler::Content.from_definition step_definition
+        assert_dot step, "#{step.id} [label=\"#{step.name}\"]"
       end
 
       #def test_variable_equals_string
@@ -57,9 +59,7 @@ module Riddler
       #  assert_dot "foo starts with 'bar'", "[label=\"starts with\"]"
       #end
 
-      def assert_dot definition, expected_source
-        guide = ::Riddler::Guide.new definition
-        content = guide.content
+      def assert_dot content, expected_source
         dot_source = content.to_dot
         assert_includes dot_source, expected_source
       end

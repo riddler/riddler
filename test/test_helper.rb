@@ -13,6 +13,23 @@ require "minitest/pride"
 require "pry-nav"
 require "riddler"
 
+module Riddler
+  module FixtureHelpers
+    def load_element file_basename
+      load_fixture "elements", file_basename
+    end
+
+    def load_step file_basename
+      load_fixture "steps", file_basename
+    end
+
+    def load_fixture content_type, file_basename
+      path = File.expand_path "fixtures/#{content_type}/#{file_basename}.yml", __dir__
+      YAML.load_file path
+    end
+  end
+end
+
 module MiniTest::Assertions
   def assert_equal_hash expected, actual, message = "Hashes are not equal: "
     diff = ::HashDiff.diff expected, actual

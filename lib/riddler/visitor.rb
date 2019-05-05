@@ -34,3 +34,4 @@ end
 
 require_relative "visitors/each"
 require_relative "visitors/dot"
+require_relative "visitors/next_step"

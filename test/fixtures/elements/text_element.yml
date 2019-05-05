@@ -1,0 +1,5 @@
+id: el_text
+name: text
+content_type: element
+type: text
+text: "Hello {{ params.name }}!"

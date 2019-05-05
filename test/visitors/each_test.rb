@@ -3,17 +3,14 @@ require "test_helper"
 module Riddler
   module Visitors
     class EachTest < Minitest::Test
-      attr_reader :definition
+      include ::Riddler::FixtureHelpers
 
-      def setup
-        path = File.expand_path "../fixtures/steps/variant_step.yml", __dir__
-        contents = File.read path
-        @definition = YAML.safe_load contents
-      end
+      def test_called_for_content_step
+        content = ::Riddler::Content.from_definition load_step "content_step"
+        count = 0
+        content.each{ |step| count = count + 1 }
 
-      def test_count
-        guide = ::Riddler::Guide.new definition
-        guide.content.each{ |step| p step.id }
+        assert_equal 1, count, "Expected block to be called 1 time"
       end
     end
   end

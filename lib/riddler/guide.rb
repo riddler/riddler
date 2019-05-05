@@ -4,18 +4,12 @@ module Riddler
 
     def initialize content_definition, context = nil
       @content_definition = normalize_definition content_definition
-      @context = normalize_context context
+      @context = ::Riddler::Context.new_from context
       @journey = find_or_create_journey
     end
 
     def content
-      @content ||= \
-        case content_definition["content_type"].to_s.downcase
-        when "element"
-          ::Riddler::Element.for content_definition, context
-        when "step"
-          ::Riddler::Step.for content_definition, context
-        end
+      @content ||= ::Riddler::Content.from_definition content_definition, context
     end
 
     def find_or_create_journey
@@ -33,17 +27,6 @@ module Riddler
     end
 
     private
-
-    def normalize_context context = nil
-      context = ::Riddler::Context.new if context.nil?
-
-      unless context.kind_of? ::Riddler::Context
-        director = ::Riddler::ContextDirector.new context
-        context = director.context
-      end
-
-      context
-    end
 
     def normalize_definition definition
       definition&.transform_keys! { |k| k.to_s }

@@ -2,6 +2,17 @@ module Riddler
   class Context
     attr_reader :variables
 
+    def self.new_from context = nil
+      context = new if context.nil?
+
+      unless context.kind_of? ::Riddler::Context
+        director = ::Riddler::ContextDirector.new context
+        context = director.context
+      end
+
+      context
+    end
+
     def initialize input = nil
       input ||= {}
       @variables = {

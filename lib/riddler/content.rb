@@ -8,6 +8,16 @@ module Riddler
       self::TYPE
     end
 
+    def self.from_definition definition, context={}
+      context = ::Riddler::Context.new_from context
+      case definition["content_type"].to_s.downcase
+      when "element"
+        ::Riddler::Element.for definition, context
+      when "step"
+        ::Riddler::Step.for definition, context
+      end
+    end
+
     def initialize definition, context
       @definition = definition
       @context = context
@@ -41,6 +51,10 @@ module Riddler
 
     def to_dot
       ::Riddler::Visitors::Dot.new.accept self
+    end
+
+    def next_step
+      ::Riddler::Visitors::NextStep.new.accept self
     end
 
     def enter
