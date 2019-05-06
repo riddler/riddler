@@ -33,11 +33,10 @@ require "riddler/elements/variant"
 
 require "riddler/guide"
 require "riddler/journey"
+require "riddler/location"
 require "riddler/messaging"
 
 require "riddler/step"
-require "riddler/steps/content"
-require "riddler/steps/variant"
 
 require "riddler/use_cases"
 

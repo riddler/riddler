@@ -1,5 +1,8 @@
 module Riddler
   class Content
+    include ::Riddler::Concerns::Includeable
+    include ::Riddler::Concerns::Logging
+
     def self.content_type
       self::CONTENT_TYPE
     end
@@ -23,24 +26,32 @@ module Riddler
       @context = context
     end
 
-    def content_type
-      self.class.content_type
+    def container
+      definition["container"]
     end
 
-    def type
-      self.class.type
+    def container_location
+      container&.location
+    end
+
+    def content_type
+      self.class.content_type
     end
 
     def id
       definition["id"]
     end
 
+    def journey
+      @journey = context["journey"]
+    end
+
     def name
       definition["name"]
     end
 
-    def journey
-      @journey = context["journey"]
+    def type
+      self.class.type
     end
 
     # Visitors
@@ -51,10 +62,6 @@ module Riddler
 
     def to_dot
       ::Riddler::Visitors::Dot.new.accept self
-    end
-
-    def next_step
-      ::Riddler::Visitors::NextStep.new.accept self
     end
 
     def enter

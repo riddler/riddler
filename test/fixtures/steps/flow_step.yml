@@ -1,0 +1,25 @@
+id: st_flow
+name: flow
+content_type: step
+type: flow
+steps:
+- id: st_first
+  name: first
+  content_type: step
+  type: input
+  elements:
+  - id: el_button
+    name: next
+    content_type: element
+    type: button
+    text: Next
+- id: st_last
+  name: last
+  content_type: step
+  type: content
+  elements:
+  - id: el_text
+    name: text
+    content_type: element
+    type: text
+    text: You're done!

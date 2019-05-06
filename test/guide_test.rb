@@ -1,49 +1,51 @@
 require "test_helper"
 
 class GuideTest < Minitest::Test
-  attr_reader :definition
+  include ::Riddler::FixtureHelpers
 
-  def setup
-    @definition = YAML.safe_load <<~DEF#, symbolize_names: true
-      id: st_variant
-      name: variant
-      content_type: step
-      type: variant
-      steps:
-      - id: st_basic
-        name: basic
-        content_type: step
-        type: content
-        elements:
-        - id: el_text
-          name: text
-          content_type: element
-          type: text
-          text: "Hello {{ params.name }}!"
-    DEF
-  end
-
-  def test_enter_element
+  def test_content_step_updates_journey_location
+    definition = load_step "content_step"
     guide = ::Riddler::Guide.new definition
+    journey = guide.journey
 
-    #assert_publishes {id: "el_text"}, topic:
-    #assert_message id: "st_variant" do
-    #  guide.process
-    #end
+    assert_nil journey.location
+
+    guide.next_step
+
+    assert_equal guide.content.id, journey.location
   end
 
-  def assert_message expected, &block
-    original_producer = ::Riddler::Messaging.producer
-    new_producer = ::Riddler::Messaging.new_producer "memory"
+  def test_variant_step_updates_journey_location
+    definition = load_step "variant_step"
+    guide = ::Riddler::Guide.new definition
+    journey = guide.journey
 
-    ::Riddler::Messaging.producer = new_producer
+    guide.next_step
 
-    yield
-
-    last_message = new_producer.last_message
-
-    assert_equal_hash expected, last_message
-  ensure
-    ::Riddler::Messaging.producer = original_producer
+    assert_equal "st_variant/st_default", journey.location
   end
+
+  #def test_enter_element
+  #  guide = ::Riddler::Guide.new definition
+
+  #  #assert_publishes {id: "el_text"}, topic:
+  #  #assert_message id: "st_variant" do
+  #  #  guide.process
+  #  #end
+  #end
+
+  #def assert_message expected, &block
+  #  original_producer = ::Riddler::Messaging.producer
+  #  new_producer = ::Riddler::Messaging.new_producer "memory"
+
+  #  ::Riddler::Messaging.producer = new_producer
+
+  #  yield
+
+  #  last_message = new_producer.last_message
+
+  #  assert_equal_hash expected, last_message
+  #ensure
+  #  ::Riddler::Messaging.producer = original_producer
+  #end
 end

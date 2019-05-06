@@ -26,6 +26,14 @@ module Riddler
       terminal node
     end
 
+    def visit_FLOW_STEP node
+      visit_steps node
+    end
+
+    def visit_INPUT_STEP node
+      terminal node
+    end
+
     def visit_VARIANT_STEP node
       visit_steps node
     end

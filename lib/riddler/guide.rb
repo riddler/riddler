@@ -21,9 +21,14 @@ module Riddler
     end
 
     def process
+
       return nil unless content.include?
       content.enter
       content.to_hash
+    end
+
+    def next_step
+      ::Riddler::Visitors::NextStep.new(journey, context).accept content
     end
 
     private

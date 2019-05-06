@@ -1,9 +1,10 @@
 module Riddler
   module Concerns
     module Includeable
-      def include?
+      def include? ctx = nil
         return true unless has_include_predicate?
-        Predicator.evaluate include_predicate, context.to_liquid
+        ctx = ctx || context
+        Predicator.evaluate include_predicate, ctx.to_liquid
       end
 
       def include_predicate

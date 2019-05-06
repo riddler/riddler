@@ -1,12 +1,13 @@
 AllCops:
   TargetRubyVersion: 2.5
   DisabledByDefault: true
+  Exclude:
+    - pkg/**/*.rb
+    - test/cases/**/*.rb
 
 Bundler/DuplicatedGem:
   Enabled: true
 Lint:
-  Enabled: true
-Performance:
   Enabled: true
 Security:
   Enabled: true
@@ -39,7 +40,7 @@ Style/MethodCallWithArgsParentheses:
 Style/SpecialGlobalVars:
   Enabled: false
 
-Layout/IndentArray:
+Layout/IndentFirstArrayElement:
   Enabled: true
   EnforcedStyle: consistent
 
@@ -60,7 +61,7 @@ Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyleForEmptyBraces: no_space
   EnforcedStyle: no_space
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   Enabled: true
   EnforcedStyle: consistent
 

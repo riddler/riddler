@@ -6,32 +6,27 @@ module Riddler
       include ::Riddler::FixtureHelpers
 
       def test_content_step_is_next_step
-        content = ::Riddler::Content.from_definition load_step "content_step"
-        next_step = content.next_step
+        definition = load_step "content_step"
+        guide = ::Riddler::Guide.new definition
+        next_step = guide.next_step
 
-        assert_equal content, next_step
+        assert_equal guide.content, next_step
       end
 
       def test_variant_step_with_no_context
-        variant_step = ::Riddler::Content.from_definition load_step "variant_step"
+        definition = load_step "variant_step"
+        guide = ::Riddler::Guide.new definition
+        next_step = guide.next_step
 
-        default_step = variant_step.steps.last
-
-        next_step = variant_step.next_step
-
-        assert_equal default_step, next_step
+        assert_equal guide.content.steps.last, next_step
       end
 
       def test_variant_step_with_context_for_first_step
         definition = load_step "variant_step"
-        variant_step = ::Riddler::Content.from_definition definition,
+        guide = ::Riddler::Guide.new definition,
           params: {name: "foo"}
 
-        first_step = variant_step.steps.first
-
-        next_step = variant_step.next_step
-
-        assert_equal first_step, next_step
+        assert_equal guide.content.steps.first, guide.next_step
       end
     end
   end

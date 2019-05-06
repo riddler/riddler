@@ -1,6 +1,6 @@
 module Riddler
-  class Element
-    include ::Riddler::Concerns::Includeable
+  class Element < ::Riddler::Content
+    CONTENT_TYPE = "element".freeze
 
     attr_reader :definition, :context
 
@@ -17,6 +17,7 @@ module Riddler
 
       # Maybe this should be a registry
       klass = subclasses.detect { |k| k.type == element_type }
+      raise "Unknown element type '#{element_type}'" if klass.nil?
 
       klass.new definition, context
     end
@@ -28,7 +29,7 @@ module Riddler
 
     def to_hash
       {
-        content_type: "element",
+        content_type: content_type,
         type: self.class.type,
         id: definition["id"],
         name: definition["name"]
