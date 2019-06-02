@@ -11,8 +11,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :updated_at, :message, 3, "google.protobuf.Timestamp"
     optional :name, :string, 4
     optional :status, :enum, 5, "riddler.protobuf.SlugStatus"
-    optional :content_definition_id, :string, 6
-    optional :interaction_identity, :string, 7
+    optional :content_version_id, :string, 6
+    optional :journey_identity, :string, 7
     optional :target_predicate, :string, 8
   end
   add_message "riddler.protobuf.EventCount" do

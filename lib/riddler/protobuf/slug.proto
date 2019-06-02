@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 /*
 Slug is one of the outputs of the RiddlerAdmin app.
-It maps a URL slug to a specific ContentDefinition and allows for
+It maps a URL slug to a specific ContentVersion and allows for
 control of if it is available (status) as well as a targeting predicate.
 Changes to Slugs do NOT need to go through compliance approval (as they don't
 allow for modification of content).
@@ -22,11 +22,11 @@ message Slug {
   // LIVE or PAUSED
   SlugStatus status = 5;
 
-  // ContentDefinition to be displayed
-  string content_definition_id = 6;
+  // ContentVersion to be displayed
+  string content_version_id = 6;
 
-  // Liquid template to define if an interaction should be reused
-  string interaction_identity = 7;
+  // Liquid template to define if an journey should be reused
+  string journey_identity = 7;
 
   // Predicate to evaluate if the content should be shown
   string target_predicate = 8;

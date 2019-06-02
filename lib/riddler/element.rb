@@ -1,6 +1,6 @@
 module Riddler
   class Element < ::Riddler::Content
-    CONTENT_TYPE = "element".freeze
+    CONTENT_TYPE = "Element".freeze
 
     attr_reader :definition, :context
 

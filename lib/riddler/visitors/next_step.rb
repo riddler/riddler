@@ -21,6 +21,7 @@ module Riddler
 
       def visit node
         @location.push node
+        node.enter @context
         super
         @location.pop
       end

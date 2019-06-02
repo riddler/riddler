@@ -1,6 +1,6 @@
 module Riddler
   class Step < ::Riddler::Content
-    CONTENT_TYPE = "step".freeze
+    CONTENT_TYPE = "Step".freeze
 
     attr_reader :definition, :context
 
@@ -33,6 +33,7 @@ module Riddler
 end
 
 require_relative "steps/content"
-require_relative "steps/flow"
+require_relative "steps/linear_flow"
 require_relative "steps/input"
+require_relative "steps/redirect"
 require_relative "steps/variant"

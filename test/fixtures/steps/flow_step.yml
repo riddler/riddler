@@ -7,6 +7,8 @@ steps:
   name: first
   content_type: step
   type: input
+  include_predicate: params.zip = 'foo'
+  include_predicate_instructions: [["load", "params.zip"], ["to_str"], ["lit", "foo"], ["compare", "EQ"]]
   elements:
   - id: el_button
     name: next

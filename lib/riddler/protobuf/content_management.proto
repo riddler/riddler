@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package riddler.protobuf;
 
-import "riddler/protobuf/content_definition.proto";
+import "riddler/protobuf/content_version.proto";
 import "riddler/protobuf/slug.proto";
 
-message CreateContentDefinitionRequest {
-  ContentDefinition content_definition = 1;
+message CreateContentVersionRequest {
+  ContentVersion content_version = 1;
 }
-message CreateContentDefinitionResponse {}
+message CreateContentVersionResponse {}
 
 message CreateSlugRequest {
   Slug slug = 1;
@@ -28,7 +28,7 @@ message GetSlugStatsResponse {
 }
 
 service ContentManagement {
-  rpc CreateContentDefinition(CreateContentDefinitionRequest) returns (CreateContentDefinitionResponse) {}
+  rpc CreateContentVersion(CreateContentVersionRequest) returns (CreateContentVersionResponse) {}
   rpc CreateSlug(CreateSlugRequest) returns (CreateSlugResponse) {}
   rpc UpdateSlug(UpdateSlugRequest) returns (UpdateSlugResponse) {}
   rpc GetSlugStats(GetSlugStatsRequest) returns (GetSlugStatsResponse) {}

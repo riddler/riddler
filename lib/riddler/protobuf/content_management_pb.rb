@@ -3,13 +3,13 @@
 
 require 'google/protobuf'
 
-require 'riddler/protobuf/content_definition_pb'
+require 'riddler/protobuf/content_version_pb'
 require 'riddler/protobuf/slug_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
-  add_message "riddler.protobuf.CreateContentDefinitionRequest" do
-    optional :content_definition, :message, 1, "riddler.protobuf.ContentDefinition"
+  add_message "riddler.protobuf.CreateContentVersionRequest" do
+    optional :content_version, :message, 1, "riddler.protobuf.ContentVersion"
   end
-  add_message "riddler.protobuf.CreateContentDefinitionResponse" do
+  add_message "riddler.protobuf.CreateContentVersionResponse" do
   end
   add_message "riddler.protobuf.CreateSlugRequest" do
     optional :slug, :message, 1, "riddler.protobuf.Slug"
@@ -31,8 +31,8 @@ end
 
 module Riddler
   module Protobuf
-    CreateContentDefinitionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentDefinitionRequest").msgclass
-    CreateContentDefinitionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentDefinitionResponse").msgclass
+    CreateContentVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentVersionRequest").msgclass
+    CreateContentVersionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentVersionResponse").msgclass
     CreateSlugRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateSlugRequest").msgclass
     CreateSlugResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateSlugResponse").msgclass
     UpdateSlugRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.UpdateSlugRequest").msgclass

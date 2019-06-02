@@ -1,5 +1,6 @@
 module Riddler
   class Content
+    include ::Enumerable
     include ::Riddler::Concerns::Includeable
     include ::Riddler::Concerns::Logging
 
@@ -52,6 +53,11 @@ module Riddler
 
     def type
       self.class.type
+    end
+
+    # Should this piece of content be shown to the participant?
+    def render?
+      include?
     end
 
     # Visitors

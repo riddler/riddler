@@ -3,7 +3,7 @@ module Riddler
 
     class Heading < ::Riddler::Element
       def self.type
-        "heading"
+        "Heading"
       end
 
       def text

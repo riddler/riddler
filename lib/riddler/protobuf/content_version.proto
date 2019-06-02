@@ -5,23 +5,23 @@ package riddler.protobuf;
 import "google/protobuf/timestamp.proto";
 
 /*
-ContentDefinition is one of the outputs of the RiddlerAdmin app. After an admin
+ContentVersion is one of the outputs of the RiddlerAdmin app. After an admin
 user has created a piece of content - it must first be approved. Once approved
-it can then be published which will create the ContentDefinition in the remote
-Riddler service. ContentDefinitions CAN NOT be modified. When changes are needed - a
-new ContentDefinition (with a bumped version) will be created.
+it can then be published which will create the ContentVersion in the remote
+Riddler service. ContentVersions CAN NOT be modified. When changes are needed - a
+new ContentVersion (with a bumped version) will be created.
 */
-message ContentDefinition {
+message ContentVersion {
   string id = 1;
   google.protobuf.Timestamp created_at = 2;
 
-  // Type of content: STEP
-  ContentType content_type = 3;
+  // Type of content: step, element
+  string content_type = 3;
 
   // ID of the content: st_12345
   string content_id = 4;
 
-  // Version of the content. Starts at 1 and increments with each new definition
+  // Version of the content. Starts at 1 and increments with each new version
   int32 version = 5;
 
   // Title of the content: User Research Prompt
@@ -31,7 +31,7 @@ message ContentDefinition {
   string description = 7;
 
   // Schema version of the definition
-  // The format and structure of a ContentDefinition may change over time
+  // The format and structure of a ContentVersion may change over time
   int32 definition_schema_version = 8;
 
   /*
@@ -42,10 +42,4 @@ message ContentDefinition {
   oneof definition {
     string definition_string = 9;
   }
-}
-
-enum ContentType {
-  UNKNOWN_CONTENT_TYPE = 0;
-  STEP = 1;
-  ELEMENT = 2;
 }
