@@ -10,15 +10,21 @@ message CreateContentVersionRequest {
 }
 message CreateContentVersionResponse {}
 
+
 message CreateSlugRequest {
   Slug slug = 1;
 }
 message CreateSlugResponse {}
 
-message UpdateSlugRequest {
-  Slug slug = 1;
+
+message GenerateContextRequest {
+  string input_json = 1;
+  repeated string variables = 2;
 }
-message UpdateSlugResponse {}
+message GenerateContextResponse {
+  string context_json = 1;
+}
+
 
 message GetSlugStatsRequest {
   Slug slug = 1;
@@ -27,9 +33,27 @@ message GetSlugStatsResponse {
   repeated SlugStats slug_stats = 1;
 }
 
+
+message PreviewContentRequest {
+  string definition_json = 1;
+  string context_json = 2;
+}
+message PreviewContentResponse {
+  string content_json = 1;
+}
+
+
+message UpdateSlugRequest {
+  Slug slug = 1;
+}
+message UpdateSlugResponse {}
+
+
 service ContentManagement {
   rpc CreateContentVersion(CreateContentVersionRequest) returns (CreateContentVersionResponse) {}
   rpc CreateSlug(CreateSlugRequest) returns (CreateSlugResponse) {}
-  rpc UpdateSlug(UpdateSlugRequest) returns (UpdateSlugResponse) {}
+  rpc GenerateContext(GenerateContextRequest) returns (GenerateContextResponse) {}
   rpc GetSlugStats(GetSlugStatsRequest) returns (GetSlugStatsResponse) {}
+  rpc PreviewContent(PreviewContentRequest) returns (PreviewContentResponse) {}
+  rpc UpdateSlug(UpdateSlugRequest) returns (UpdateSlugResponse) {}
 }
