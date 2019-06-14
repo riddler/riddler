@@ -2,7 +2,7 @@ module Riddler
   module Elements
     class Text < ::Riddler::Element
       def self.type
-        "text"
+        "Text"
       end
 
       def text

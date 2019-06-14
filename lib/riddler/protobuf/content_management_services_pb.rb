@@ -15,10 +15,12 @@ module Riddler
         self.unmarshal_class_method = :decode
         self.service_name = 'riddler.protobuf.ContentManagement'
 
-        rpc :CreateContentDefinition, CreateContentDefinitionRequest, CreateContentDefinitionResponse
+        rpc :CreateContentVersion, CreateContentVersionRequest, CreateContentVersionResponse
         rpc :CreateSlug, CreateSlugRequest, CreateSlugResponse
-        rpc :UpdateSlug, UpdateSlugRequest, UpdateSlugResponse
+        rpc :GenerateContext, GenerateContextRequest, GenerateContextResponse
         rpc :GetSlugStats, GetSlugStatsRequest, GetSlugStatsResponse
+        rpc :PreviewContent, PreviewContentRequest, PreviewContentResponse
+        rpc :UpdateSlug, UpdateSlugRequest, UpdateSlugResponse
       end
 
       Stub = Service.rpc_stub_class

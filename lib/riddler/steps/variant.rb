@@ -1,9 +1,7 @@
 module Riddler
   module Steps
     class Variant < ::Riddler::Step
-      def self.type
-        "variant"
-      end
+      TYPE = "Variant".freeze
 
       def steps
         @steps ||= definition["steps"].map do |hash|
@@ -13,6 +11,10 @@ module Riddler
 
       def included_step
         steps.detect &:include?
+      end
+
+      def render?
+        false
       end
 
       def to_hash

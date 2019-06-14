@@ -7,11 +7,16 @@ require "outlog"
 require "predicator"
 require "ulid"
 
-require "riddler/includeable"
+require "riddler/concerns"
 
 require "riddler/drops/hash_drop"
+require "riddler/drops/journey_drop"
+
+require "riddler/action"
 
 require "riddler/configuration"
+
+require "riddler/content"
 
 require "riddler/context_builder"
 require "riddler/context_builders/faraday_builder"
@@ -26,11 +31,16 @@ require "riddler/elements/link"
 require "riddler/elements/text"
 require "riddler/elements/variant"
 
+require "riddler/guide"
+require "riddler/journey"
+require "riddler/location"
+require "riddler/messaging"
+
 require "riddler/step"
-require "riddler/steps/content"
-require "riddler/steps/variant"
 
 require "riddler/use_cases"
+
+require "riddler/visitor"
 
 module Riddler
   class Error < StandardError; end
@@ -49,6 +59,11 @@ module Riddler
     @logger ||= ::Outlog.logger
   end
 
+  def self.content_for content_definition, context={}
+    guide = ::Riddler::Guide.new content_definition, context
+    guide.content
+  end
+
   def self.render content_definition, context={}
     unless context.kind_of? ::Riddler::Context
       director = ::Riddler::ContextDirector.new context
@@ -56,9 +71,9 @@ module Riddler
     end
 
     case content_definition["content_type"]
-    when "element"
+    when "Element"
       content = ::Riddler::Element.for content_definition, context
-    when "step"
+    when "Step"
       content = ::Riddler::Step.for content_definition, context
     end
 

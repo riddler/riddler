@@ -3,7 +3,7 @@ module Riddler
 
     class Copy < ::Riddler::Element
       def self.type
-        "copy"
+        "Copy"
       end
 
       def text

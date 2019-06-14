@@ -29,8 +29,8 @@ module ::Riddler
 
     def generate
       folder = input_filename.dirname.basename.to_s
-      output_filename = project_root.join *%W[ test cases #{folder} #{test_case_name}_test.rb ]
-      puts "Generating #{output_filename.relative_path_from(project_root)}"
+      output_filename = project_root.join "test", "cases", folder, "#{test_case_name}_test.rb"
+      puts "Generating #{output_filename.relative_path_from project_root}"
       output_filename.dirname.mkdir unless output_filename.dirname.exist?
       File.write output_filename, render
     end
@@ -42,7 +42,7 @@ module ::Riddler
     end
 
     def classify string
-      string.split('_').collect!{ |w| w.capitalize }.join
+      string.split("_").collect! { |w| w.capitalize }.join
     end
 
     def test_class_template

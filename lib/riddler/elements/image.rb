@@ -2,7 +2,7 @@ module Riddler
   module Elements
     class Image < ::Riddler::Element
       def self.type
-        "image"
+        "Image"
       end
 
       def src

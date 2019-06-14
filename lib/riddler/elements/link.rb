@@ -2,7 +2,7 @@ module Riddler
   module Elements
     class Link < ::Riddler::Element
       def self.type
-        "link"
+        "Link"
       end
 
       def href

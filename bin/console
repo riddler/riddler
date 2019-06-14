@@ -3,5 +3,13 @@
 require "bundler/setup"
 require "riddler"
 
+R = Riddler
+
+def R.png definition
+  content = content_for definition
+  File.write "/tmp/riddler.dot", content.to_dot
+  `cd /tmp && dot -Tpng riddler.dot > riddler.png`
+end
+
 require "pry"
 Pry.start

@@ -1,0 +1,10 @@
+id: st_foo
+name: foo
+content_type: Step
+type: Content
+elements:
+- id: el_text
+  name: text
+  content_type: Element
+  type: Text
+  text: "Hello {{ params.name }}!"

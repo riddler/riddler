@@ -3,23 +3,25 @@
 
 require 'google/protobuf'
 
-require 'riddler/protobuf/content_definition_pb'
+require 'riddler/protobuf/content_version_pb'
 require 'riddler/protobuf/slug_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
-  add_message "riddler.protobuf.CreateContentDefinitionRequest" do
-    optional :content_definition, :message, 1, "riddler.protobuf.ContentDefinition"
+  add_message "riddler.protobuf.CreateContentVersionRequest" do
+    optional :content_version, :message, 1, "riddler.protobuf.ContentVersion"
   end
-  add_message "riddler.protobuf.CreateContentDefinitionResponse" do
+  add_message "riddler.protobuf.CreateContentVersionResponse" do
   end
   add_message "riddler.protobuf.CreateSlugRequest" do
     optional :slug, :message, 1, "riddler.protobuf.Slug"
   end
   add_message "riddler.protobuf.CreateSlugResponse" do
   end
-  add_message "riddler.protobuf.UpdateSlugRequest" do
-    optional :slug, :message, 1, "riddler.protobuf.Slug"
+  add_message "riddler.protobuf.GenerateContextRequest" do
+    optional :input_json, :string, 1
+    repeated :variables, :string, 2
   end
-  add_message "riddler.protobuf.UpdateSlugResponse" do
+  add_message "riddler.protobuf.GenerateContextResponse" do
+    optional :context_json, :string, 1
   end
   add_message "riddler.protobuf.GetSlugStatsRequest" do
     optional :slug, :message, 1, "riddler.protobuf.Slug"
@@ -27,17 +29,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "riddler.protobuf.GetSlugStatsResponse" do
     repeated :slug_stats, :message, 1, "riddler.protobuf.SlugStats"
   end
+  add_message "riddler.protobuf.PreviewContentRequest" do
+    optional :definition_json, :string, 1
+    optional :context_json, :string, 2
+  end
+  add_message "riddler.protobuf.PreviewContentResponse" do
+    optional :content_json, :string, 1
+  end
+  add_message "riddler.protobuf.UpdateSlugRequest" do
+    optional :slug, :message, 1, "riddler.protobuf.Slug"
+  end
+  add_message "riddler.protobuf.UpdateSlugResponse" do
+  end
 end
 
 module Riddler
   module Protobuf
-    CreateContentDefinitionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentDefinitionRequest").msgclass
-    CreateContentDefinitionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentDefinitionResponse").msgclass
+    CreateContentVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentVersionRequest").msgclass
+    CreateContentVersionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateContentVersionResponse").msgclass
     CreateSlugRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateSlugRequest").msgclass
     CreateSlugResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.CreateSlugResponse").msgclass
-    UpdateSlugRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.UpdateSlugRequest").msgclass
-    UpdateSlugResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.UpdateSlugResponse").msgclass
+    GenerateContextRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.GenerateContextRequest").msgclass
+    GenerateContextResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.GenerateContextResponse").msgclass
     GetSlugStatsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.GetSlugStatsRequest").msgclass
     GetSlugStatsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.GetSlugStatsResponse").msgclass
+    PreviewContentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.PreviewContentRequest").msgclass
+    PreviewContentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.PreviewContentResponse").msgclass
+    UpdateSlugRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.UpdateSlugRequest").msgclass
+    UpdateSlugResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("riddler.protobuf.UpdateSlugResponse").msgclass
   end
 end

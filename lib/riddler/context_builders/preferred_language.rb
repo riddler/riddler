@@ -18,7 +18,7 @@ module Riddler
       def sorted_accept_languages
         language_header = context.headers[ACCEPT_LANGAUGE_HEADER]
         languages = language_header.scan(LANGUAGE_REGEXP).map do |lang, q|
-          [lang, (q || '1').to_f]
+          [lang, (q || "1").to_f]
         end
         languages.sort_by(&:last).reverse.map(&:first)
       end

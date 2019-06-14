@@ -2,7 +2,7 @@ module Riddler
   module Elements
     class Varient < ::Riddler::Element
       def self.type
-        "variant"
+        "Variant"
       end
 
       def to_hash

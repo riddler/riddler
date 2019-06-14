@@ -1,8 +1,8 @@
 module Riddler
-  class Step
-    include ::Riddler::Includeable
+  class Step < ::Riddler::Content
+    CONTENT_TYPE = "Step".freeze
 
-    attr_reader :definition, :context, :preview_enabled
+    attr_reader :definition, :context
 
     def self.subclasses
       @@subclasses ||= []
@@ -16,22 +16,24 @@ module Riddler
       step_type = definition["type"]
 
       klass = subclasses.detect { |k| k.type == step_type }
+      raise "Unknown step type '#{step_type}'" if klass.nil?
 
       klass.new definition, context
     end
 
-    def initialize definition, context
-      @definition = definition
-      @context = context
-    end
-
     def to_hash
       {
-        content_type: "step",
-        type: self.class.type,
+        content_type: content_type,
+        type: type,
         id: definition["id"],
         name: definition["name"]
       }
     end
   end
 end
+
+require_relative "steps/content"
+require_relative "steps/linear_flow"
+require_relative "steps/input"
+require_relative "steps/redirect"
+require_relative "steps/variant"
