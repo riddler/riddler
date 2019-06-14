@@ -15,9 +15,9 @@ module Riddler
     def self.from_definition definition, context={}
       context = ::Riddler::Context.new_from context
       case definition["content_type"].to_s.downcase
-      when "element"
+      when "Element"
         ::Riddler::Element.for definition, context
-      when "step"
+      when "Step"
         ::Riddler::Step.for definition, context
       end
     end
