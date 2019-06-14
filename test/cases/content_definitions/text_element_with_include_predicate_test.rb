@@ -4,7 +4,7 @@ class TextElementWithIncludePredicateTest < ::Minitest::Test
   attr_reader :definition
 
   def setup
-    @definition = {"id"=>"el_text", "name"=>"text", "content_type"=>"element", "type"=>"text", "text"=>"hello", "include_predicate"=>"params.name = 'foo'", "include_predicate_instructions"=>[["load", "params.name"], ["to_str"], ["lit", "foo"], ["compare", "EQ"]]}
+    @definition = {"id"=>"el_text", "name"=>"text", "content_type"=>"Element", "type"=>"Text", "text"=>"hello", "include_predicate"=>"params.name = 'foo'", "include_predicate_instructions"=>[["load", "params.name"], ["to_str"], ["lit", "foo"], ["compare", "EQ"]]}
   end
 
   def test_with_no_context
@@ -18,7 +18,7 @@ class TextElementWithIncludePredicateTest < ::Minitest::Test
   end
 
   def test_with_correct_name_param
-    expected_result = {"content_type"=>"element", "type"=>"text", "id"=>"el_text", "name"=>"text", "text"=>"hello"}
+    expected_result = {"content_type"=>"Element", "type"=>"Text", "id"=>"el_text", "name"=>"text", "text"=>"hello"}
     context = {"params"=>{"name"=>"foo"}}
 
     result = ::Riddler.render definition, context

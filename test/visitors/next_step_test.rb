@@ -6,6 +6,7 @@ module Riddler
       include ::Riddler::FixtureHelpers
 
       def test_content_step_is_next_step
+        skip
         definition = load_step "content_step"
         guide = ::Riddler::Guide.new definition
         next_step = guide.next_step
@@ -14,6 +15,7 @@ module Riddler
       end
 
       def test_variant_step_with_no_context
+        skip
         definition = load_step "variant_step"
         guide = ::Riddler::Guide.new definition
         next_step = guide.next_step
@@ -22,6 +24,7 @@ module Riddler
       end
 
       def test_variant_step_with_context_for_first_step
+        skip
         definition = load_step "variant_step"
         guide = ::Riddler::Guide.new definition,
           params: {name: "foo"}

@@ -4,6 +4,7 @@ class GuideTest < Minitest::Test
   include ::Riddler::FixtureHelpers
 
   def test_content_step_updates_journey_location
+    skip
     definition = load_step "content_step"
     guide = ::Riddler::Guide.new definition
     journey = guide.journey
@@ -16,6 +17,7 @@ class GuideTest < Minitest::Test
   end
 
   def test_variant_step_updates_journey_location
+    skip
     definition = load_step "variant_step"
     guide = ::Riddler::Guide.new definition
     journey = guide.journey

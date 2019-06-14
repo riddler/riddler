@@ -71,9 +71,9 @@ module Riddler
     end
 
     case content_definition["content_type"]
-    when "element"
+    when "Element"
       content = ::Riddler::Element.for content_definition, context
-    when "step"
+    when "Step"
       content = ::Riddler::Step.for content_definition, context
     end
 

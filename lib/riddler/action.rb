@@ -4,4 +4,5 @@ module Riddler
   end
 end
 
-require_relative "actions/http_get"
+require_relative "actions/http_request"
+require_relative "actions/assignment"

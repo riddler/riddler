@@ -4,11 +4,11 @@ class BasicTextElementTest < ::Minitest::Test
   attr_reader :definition
 
   def setup
-    @definition = {"id"=>"el_text", "name"=>"text", "content_type"=>"element", "type"=>"text", "text"=>"Hello {{ params.name }}!"}
+    @definition = {"id"=>"el_text", "name"=>"text", "content_type"=>"Element", "type"=>"Text", "text"=>"Hello {{ params.name }}!"}
   end
 
   def test_with_no_context
-    expected_result = {"content_type"=>"element", "type"=>"text", "id"=>"el_text", "name"=>"text", "text"=>"Hello !"}
+    expected_result = {"content_type"=>"Element", "type"=>"Text", "id"=>"el_text", "name"=>"text", "text"=>"Hello !"}
     context = nil
 
     result = ::Riddler.render definition, context
@@ -18,7 +18,7 @@ class BasicTextElementTest < ::Minitest::Test
   end
 
   def test_with_name_param
-    expected_result = {"content_type"=>"element", "type"=>"text", "id"=>"el_text", "name"=>"text", "text"=>"Hello World!"}
+    expected_result = {"content_type"=>"Element", "type"=>"Text", "id"=>"el_text", "name"=>"text", "text"=>"Hello World!"}
     context = {"params"=>{"name"=>"World"}}
 
     result = ::Riddler.render definition, context
