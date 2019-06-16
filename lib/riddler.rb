@@ -25,11 +25,6 @@ require "riddler/context_director"
 require "riddler/context"
 
 require "riddler/element"
-require "riddler/elements/heading"
-require "riddler/elements/image"
-require "riddler/elements/link"
-require "riddler/elements/text"
-require "riddler/elements/variant"
 
 require "riddler/guide"
 require "riddler/journey"

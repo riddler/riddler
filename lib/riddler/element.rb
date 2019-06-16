@@ -37,3 +37,12 @@ module Riddler
     end
   end
 end
+
+require "riddler/elements/button"
+require "riddler/elements/heading"
+require "riddler/elements/image"
+require "riddler/elements/link"
+require "riddler/elements/text"
+require "riddler/elements/variant"
+
+require "riddler/elements/text_question"
