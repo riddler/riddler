@@ -37,3 +37,9 @@ module Riddler
     end
   end
 end
+
+require_relative "elements/heading"
+require_relative "elements/image"
+require_relative "elements/link"
+require_relative "elements/text"
+require_relative "elements/variant"
