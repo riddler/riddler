@@ -13,8 +13,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -109,7 +109,7 @@ GEM
     pry-nav (0.2.4)
       pry (>= 0.9.10, < 0.11.0)
     psych (3.1.0)
-    public_suffix (3.0.3)
+    public_suffix (5.0.0)
     rainbow (3.0.0)
     rake (10.5.0)
     rb-fsevent (0.10.3)
